@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}about | {{ profile.name }}{% endblock %}
+
+{% block content %}
+<h1>about</h1>
+
+{% for paragraph in about_bio %}
+<p>{{ paragraph | safe }}</p>
+{% endfor %}
+
+<hr />
+
+<p class="prompt">elsewhere</p>
+<ul class="bare mono">
+  <li><a href="https://github.com/{{ profile.github }}">github.com/{{ profile.github }}</a></li>
+  <li><a href="https://www.linkedin.com/in/{{ profile.linkedin }}/">linkedin</a></li>
+  <li>based in {{ profile.location }}</li>
+</ul>
+{% endblock %}

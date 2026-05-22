@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}talks | {{ profile.name }}{% endblock %}
+
+{% block content %}
+<h1>talks</h1>
+<p class="muted">
+  Selected conference talks and recorded sessions. Edit the
+  <code class="mono">TALKS</code> list in <code class="mono">content.py</code>.
+</p>
+
+<ul class="bare" style="margin-top: 1.5rem;">
+  {% for t in talks %}
+  <li class="card">
+    <div class="card-header">
+      <span class="card-title">
+        {% if t.url %}<a href="{{ t.url }}">{{ t.title }}</a>{% else %}{{ t.title }}{% endif %}
+      </span>
+      <span class="card-meta">{{ t.date or t.year }}</span>
+    </div>
+    <p class="card-desc">{{ t.venue }}{% if t.co_presenters %}, with {{ t.co_presenters }}{% endif %}</p>
+    {% if t.summary %}<p class="card-desc" style="margin-top: 0.4rem;">{{ t.summary }}</p>{% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

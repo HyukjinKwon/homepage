@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% from "_project_card.html" import project_card %}
+
+{% block title %}projects | {{ profile.name }}{% endblock %}
+
+{% block content %}
+<h1>projects</h1>
+<p class="muted">
+  Open-source work I'm directly involved in. Star counts reflect a snapshot;
+  see GitHub for current numbers.
+</p>
+
+<section style="margin-top: 1.5rem;">
+  {% for p in projects %}
+    {{ project_card(p) }}
+  {% endfor %}
+</section>
+{% endblock %}

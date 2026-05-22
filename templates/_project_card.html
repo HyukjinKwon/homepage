@@ -1,0 +1,16 @@
+{% macro project_card(project) %}
+{% set repo = project.org ~ '/' ~ project.name %}
+<article class="card">
+  <div class="card-header">
+    <span class="card-title">
+      <a href="{{ project.url }}">{{ repo }}</a>
+    </span>
+    <span class="card-meta">
+      <img class="badge"
+           src="https://img.shields.io/github/stars/{{ repo }}?style=flat-square&logo=github&label=stars&color=888888"
+           alt="GitHub stars for {{ repo }}" loading="lazy" />
+    </span>
+  </div>
+  <p class="card-desc">{{ project.description }}</p>
+</article>
+{% endmacro %}

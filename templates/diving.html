@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}diving | {{ profile.name }}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin="" />
+
+<h1>diving</h1>
+<p class="muted">
+  PADI Freediver Instructor; also dive scuba. A few of the spots I've logged
+  across Asia and the Indian Ocean, pinned at regional resolution.
+</p>
+
+<div class="dive-gallery">
+  <figure>
+    <img src="{{ url_for('/images/diving/wreck.jpg') }}"
+         alt="Freediving toward a wreck porthole" loading="lazy" />
+  </figure>
+  <figure>
+    <img src="{{ url_for('/images/diving/turtle.jpg') }}"
+         alt="Freediving alongside a green sea turtle over a coral reef"
+         loading="lazy" />
+  </figure>
+</div>
+
+<div id="dive-map" class="dive-map"></div>
+
+<ul class="bare dive-list">
+  {% for site in dive_sites %}
+  <li class="dive-row">
+    <span class="dive-region">{{ site.region }}</span>
+    <span class="dive-country muted">{{ site.country }}</span>
+  </li>
+  {% endfor %}
+</ul>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+<script>
+  (function () {
+    var sites = {{ dive_sites_json | safe }};
+    var map = L.map('dive-map', {
+      scrollWheelZoom: false,
+      attributionControl: true
+    }).setView([10, 110], 3);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 12,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    sites.forEach(function (s) {
+      L.circleMarker([s.lat, s.lon], {
+        radius: 7,
+        color: '#0d1117',
+        weight: 1,
+        fillColor: '#e25a1c',
+        fillOpacity: 0.9
+      })
+        .bindPopup('<strong>' + s.region + '</strong><br/>' + s.country)
+        .addTo(map);
+    });
+  })();
+</script>
+{% endblock %}

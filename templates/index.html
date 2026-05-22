@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% from "_project_card.html" import project_card %}
+
+{% block content %}
+<section class="hero">
+  <img class="avatar" src="https://github.com/{{ profile.github }}.png?size=160"
+       alt="{{ profile.name }} avatar" width="80" height="80" loading="eager" />
+  <div>
+    <h1 class="hero-name"><a href="https://g.co/kgs/mtcWskC">{{ profile.name }}</a></h1>
+    <p class="affiliations">
+      <span class="tag">{{ profile.title }}</span>
+      {% for a in profile.affiliations %}<span class="tag">{{ a }}</span>{% endfor %}
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="prompt">whoami</p>
+  <p>{{ profile.whoami }}</p>
+</section>
+
+<section>
+  <h2>featured projects</h2>
+  {% for p in projects[:3] %}
+    {{ project_card(p) }}
+  {% endfor %}
+  <p style="margin-top: 1rem;"><a href="{{ url_for('/projects/') }}">see all projects -&gt;</a></p>
+</section>
+
+<section>
+  <h2>elsewhere</h2>
+  <ul class="bare mono">
+    <li><a href="https://github.com/{{ profile.github }}">github.com/{{ profile.github }}</a></li>
+    <li><a href="https://www.linkedin.com/in/{{ profile.linkedin }}/">linkedin</a></li>
+    <li><a href="{{ url_for('/contact/') }}">contact -&gt;</a></li>
+  </ul>
+</section>
+{% endblock %}

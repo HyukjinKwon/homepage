@@ -1,0 +1,15 @@
+<header class="site-header">
+  <nav aria-label="Primary" class="site-nav">
+    <ul class="nav-list">
+      {% for href, label in nav_links %}
+      <li>
+        <a href="{{ href }}"{% if current == href %} aria-current="page"{% endif %}>{{ label }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    <button id="theme-toggle" type="button" aria-label="Toggle color theme">
+      <span data-icon="dark" hidden>dark</span>
+      <span data-icon="light">light</span>
+    </button>
+  </nav>
+</header>

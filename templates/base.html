@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}{{ profile.name }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ profile.name }} - {{ profile.title }}. {{ profile.affiliations | join(', ') }}.{% endblock %}" />
+  <meta property="og:title" content="{{ self.title() }}" />
+  <meta property="og:description" content="{{ self.description() }}" />
+  <meta property="og:type" content="profile" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="google-adsense-account" content="ca-pub-6449234458197635" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" href="{{ url_for('/favicon.png') }}" type="image/png" sizes="32x32" />
+  <link rel="icon" href="{{ url_for('/favicon-16.png') }}" type="image/png" sizes="16x16" />
+  <link rel="icon" href="{{ url_for('/favicon.svg') }}" type="image/svg+xml" sizes="any" />
+  <link rel="apple-touch-icon" href="{{ url_for('/apple-touch-icon.png') }}" sizes="180x180" />
+  <link rel="stylesheet" href="{{ url_for('/css/global.css') }}" />
+  <script>
+    // Apply stored theme before paint to avoid FOUC.
+    (function () {
+      var stored = localStorage.getItem('theme');
+      if (stored === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6449234458197635"
+          crossorigin="anonymous"></script>
+</head>
+<body>
+  {% include "_header.html" %}
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  {% include "_footer.html" %}
+  <script src="{{ url_for('/js/theme.js') }}" defer></script>
+</body>
+</html>

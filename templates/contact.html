@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}contact | {{ profile.name }}{% endblock %}
+
+{% block content %}
+<h1>contact</h1>
+
+<p class="prompt">say hi</p>
+<p>Best reached via the channels below. I'm based in {{ profile.location }}.</p>
+
+<ul class="bare mono contact-list">
+  <li>
+    <span class="muted">github &nbsp;&nbsp;</span>
+    <a href="https://github.com/{{ profile.github }}">@{{ profile.github }}</a>
+  </li>
+  <li>
+    <span class="muted">linkedin</span>
+    <a href="https://www.linkedin.com/in/{{ profile.linkedin }}/">profile</a>
+  </li>
+  {% if profile.email %}
+  <li>
+    <span class="muted">email &nbsp;&nbsp;&nbsp;</span>
+    <a href="mailto:{{ profile.email }}">{{ profile.email }}</a>
+  </li>
+  {% endif %}
+</ul>
+
+{% if not profile.email %}
+<p class="muted small">
+  <em>To list an email, set <code class="mono">email=</code> in <code class="mono">content.py</code>.</em>
+</p>
+{% endif %}
+{% endblock %}
